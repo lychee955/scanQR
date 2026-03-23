@@ -37,17 +37,7 @@ captures/
 
 # IntelliJ
 *.iml
-.idea/caches
-.idea/libraries
-.idea/modules.xml
-.idea/workspace.xml
-.idea/navEditor.xml
-.idea/assetWizardSettings.xml
-.idea/jarRepositories.xml
-.idea/.name
-.idea/compiler.xml
-.idea/misc.xml
-.idea/vcs.xml
+.idea/
 
 # Keystore files
 *.jks
