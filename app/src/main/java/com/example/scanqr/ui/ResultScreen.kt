@@ -48,29 +48,6 @@ fun ResultScreen(
     }
 
     Scaffold(
-        floatingActionButton = {
-            FloatingActionButton(
-                onClick = {
-                    Log.d("ResultScreen", "Copying text (length: ${result.length})")
-                    try {
-                        ClipboardHelper.copyText(context, result)
-                        onCopy()
-                        showCopiedMessage = true
-                        Log.d("ResultScreen", "Copy successful")
-                    } catch (e: Exception) {
-                        Log.e("ResultScreen", "Copy failed", e)
-                    }
-                },
-                containerColor = MaterialTheme.colorScheme.primary,
-                contentColor = MaterialTheme.colorScheme.onPrimary
-            ) {
-                Icon(
-                    imageVector = Icons.Rounded.ContentCopy,
-                    contentDescription = "复制",
-                    modifier = Modifier.size(24.dp)
-                )
-            }
-        }
     ) { paddingValues ->
         Column(
             modifier = Modifier
@@ -135,17 +112,46 @@ fun ResultScreen(
                 }
             }
 
-            // 扫码提示和继续扫码按钮
+            // 复制按钮和继续扫码按钮
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 8.dp),
-                horizontalArrangement = Arrangement.Center,
+                horizontalArrangement = Arrangement.spacedBy(12.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
+                // 复制按钮 - 左侧
+                Button(
+                    onClick = {
+                        Log.d("ResultScreen", "Copying text (length: ${result.length})")
+                        try {
+                            ClipboardHelper.copyText(context, result)
+                            onCopy()
+                            showCopiedMessage = true
+                            Log.d("ResultScreen", "Copy successful")
+                        } catch (e: Exception) {
+                            Log.e("ResultScreen", "Copy failed", e)
+                        }
+                    },
+                    modifier = Modifier.weight(1f),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = MaterialTheme.colorScheme.primary,
+                        contentColor = MaterialTheme.colorScheme.onPrimary
+                    )
+                ) {
+                    Icon(
+                        imageVector = Icons.Rounded.ContentCopy,
+                        contentDescription = "复制",
+                        modifier = Modifier.size(20.dp)
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text("复制")
+                }
+
+                // 继续扫码按钮 - 右侧
                 Button(
                     onClick = onScanAgain,
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier.weight(1f),
                     colors = ButtonDefaults.buttonColors(
                         containerColor = MaterialTheme.colorScheme.secondaryContainer,
                         contentColor = MaterialTheme.colorScheme.onSecondaryContainer
