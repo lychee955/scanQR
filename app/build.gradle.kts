@@ -28,6 +28,8 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            // 临时使用 debug 签名，让 release 包可以安装
+            signingConfig = signingConfigs.getByName("debug")
         }
     }
     compileOptions {
