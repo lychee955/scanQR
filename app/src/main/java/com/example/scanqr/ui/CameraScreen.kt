@@ -86,7 +86,7 @@ fun CameraScreen(
                     modifier = Modifier
                         .align(Alignment.BottomCenter)
                         .fillMaxWidth()
-                        .padding(16.dp)
+                        .padding(start = 16.dp, end = 16.dp, bottom = 80.dp)
                         .background(
                             color = Color.Black.copy(alpha = 0.8f),
                             shape = RoundedCornerShape(12.dp)
