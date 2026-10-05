@@ -1,8 +1,10 @@
 # scanQR
 
-一个简洁、纯本地、隐私优先的 Android 二维码扫描器。
+English | [简体中文](./README.zh-CN.md)
 
-> **所扫即所得：只展示二维码中的原始内容，不自动跳转，不自动执行。**
+A simple, fully local, privacy-first QR code scanner for Android.
+
+> **What you scan is what you get: view the raw content of a QR code, with no automatic redirects or actions.**
 
 **Scan. Read. Nothing else.**
 
@@ -13,154 +15,154 @@
   <img src="https://img.shields.io/badge/Architecture-MVVM-purple.svg" alt="Architecture">
 </p>
 
-## 为什么是 scanQR？
+## Why scanQR?
 
-很多扫码工具会根据二维码内容自动打开网页、唤起 App 或执行其他操作。
+Many QR code scanners automatically open websites, launch apps, or perform other actions based on a QR code's content.
 
-scanQR 的设计原则很简单：
+scanQR follows a simple principle:
 
-**扫描只负责读取，不替用户做决定。**
+**Scanning reads the content. You decide what happens next.**
 
-无论二维码中包含 URL、Deep Link 还是普通文本，scanQR 都只展示它的**原始内容**。
+Whether a QR code contains a URL, a deep link, or plain text, scanQR displays only its **raw content**.
 
-你可以先看清楚扫到了什么，再决定下一步做什么。
+See exactly what you scanned before deciding what to do next.
 
-## 功能特性
+## Features
 
-- 👁️ **所扫即所得**：直接展示二维码中的原始内容
-- 🚫 **不自动跳转**：URL、Deep Link 等内容均只作为文本展示
-- 🛡️ **不自动执行**：不会主动打开网页、应用或触发其他操作
-- 🔒 **完全本地处理**：无需联网，扫码内容不会上传
-- 📷 相机实时扫描二维码
-- 🔍 支持同时检测多个二维码
-- 📋 多个二维码可从底部列表中选择查看
-- 📝 一键复制原始内容到剪贴板
-- 🎨 Material Design 3 简洁界面
+- 👁️ **What you scan is what you get**: view the raw content of a QR code directly
+- 🚫 **No automatic redirects**: URLs, deep links, and other content are displayed only as text
+- 🛡️ **No automatic actions**: no automatic opening of websites or apps, or triggering of other actions
+- 🔒 **Fully local processing**: no internet connection required, and scanned content is never uploaded
+- 📷 Scan QR codes in real time using the camera
+- 🔍 Detect multiple QR codes at once
+- 📋 Select a QR code from the list at the bottom to view its content
+- 📝 Copy raw content to the clipboard with one tap
+- 🎨 Clean Material Design 3 interface
 
-## 隐私与安全
+## Privacy and Security
 
-scanQR 尽可能减少权限、联网和自动行为。
+scanQR minimizes permissions, network access, and automatic behavior.
 
-- ✅ 二维码识别完全在本地完成
-- ✅ 扫描内容不会上传到服务器
-- ✅ URL、Deep Link 等内容仅作为原始文本展示
-- ✅ 不自动打开网页
-- ✅ 不自动唤起第三方应用
-- ✅ 不根据二维码内容自动执行操作
-- ✅ ML Kit 使用本地模型
-- ✅ 无第三方 SDK 数据收集
-- ✅ 相机数据仅用于二维码识别
-- ✅ 仅申请 `CAMERA` 权限
+- ✅ QR code recognition runs entirely on-device
+- ✅ Scanned content is never uploaded to a server
+- ✅ URLs, deep links, and other content are displayed only as raw text
+- ✅ No automatic opening of websites
+- ✅ No automatic launching of third-party apps
+- ✅ No automatic actions based on QR code content
+- ✅ ML Kit uses an on-device model
+- ✅ No data collection by third-party SDKs
+- ✅ Camera data is used only for QR code recognition
+- ✅ Requests only the `CAMERA` permission
 
-**你看到什么，由二维码决定；你接下来做什么，由你决定。**
+**The QR code determines what you see. You determine what happens next.**
 
-## 技术栈
+## Tech Stack
 
-| 类别 | 技术 |
+| Category | Technology |
 | --- | --- |
-| 语言 | Kotlin |
-| UI 框架 | Jetpack Compose + Material 3 |
-| 相机 | CameraX 1.4.1 |
-| 扫码 | ML Kit Barcode Scanning 17.3.0 |
-| 架构 | MVVM（ViewModel + StateFlow） |
-| 权限处理 | Accompanist Permissions 0.36.0 |
-| 构建 | Gradle（Kotlin DSL） |
+| Language | Kotlin |
+| UI Framework | Jetpack Compose + Material 3 |
+| Camera | CameraX 1.4.1 |
+| QR Code Scanning | ML Kit Barcode Scanning 17.3.0 |
+| Architecture | MVVM (ViewModel + StateFlow) |
+| Permission Handling | Accompanist Permissions 0.36.0 |
+| Build | Gradle (Kotlin DSL) |
 
-## 项目结构
+## Project Structure
 
 ```text
 app/
 ├── src/main/java/com/example/scanqr/
-│   ├── MainActivity.kt           # 主 Activity：权限处理 + 导航
-│   ├── MainViewModel.kt          # ViewModel：剪贴板状态管理
-│   ├── scanner/                  # 扫码模块
-│   │   ├── CameraManager.kt      # CameraX 生命周期管理
-│   │   ├── QrCodeAnalyzer.kt     # ML Kit 分析器（500ms 节流）
-│   │   └── QRCodeInfo.kt         # 二维码数据类
-│   ├── ui/                       # UI 层（Jetpack Compose）
-│   │   ├── CameraScreen.kt       # 扫码界面 + 二维码列表
-│   │   ├── CameraPreview.kt      # 相机预览组件
-│   │   ├── ResultScreen.kt       # 原始内容展示 + 复制功能
-│   │   └── theme/                # Material 3 主题
+│   ├── MainActivity.kt           # Main Activity: permissions + navigation
+│   ├── MainViewModel.kt          # ViewModel: clipboard state management
+│   ├── scanner/                  # Scanning module
+│   │   ├── CameraManager.kt      # CameraX lifecycle management
+│   │   ├── QrCodeAnalyzer.kt     # ML Kit analyzer (500 ms throttling)
+│   │   └── QRCodeInfo.kt         # QR code data class
+│   ├── ui/                       # UI layer (Jetpack Compose)
+│   │   ├── CameraScreen.kt       # Scanning screen + QR code list
+│   │   ├── CameraPreview.kt      # Camera preview component
+│   │   ├── ResultScreen.kt       # Raw content display + copy action
+│   │   └── theme/                # Material 3 theme
 │   └── utils/
-│       └── ClipboardHelper.kt    # 剪贴板工具
+│       └── ClipboardHelper.kt    # Clipboard utility
 ```
 
-## 快速开始
+## Getting Started
 
-### 构建
+### Build
 
 ```bash
-# Debug 构建
+# Debug build
 ./gradlew assembleDebug
 
-# Release 构建
+# Release build
 ./gradlew assembleRelease
 
-# 安装到连接的设备
+# Install on a connected device
 ./gradlew installDebug
 ```
 
-### 安装 APK
+### Install the APK
 
 ```bash
 adb install app/build/outputs/apk/debug/app-debug.apk
 ```
 
-## 使用说明
+## Usage
 
-1. 授予相机权限
-2. 将二维码放入取景框
-3. 检测到二维码后，底部会显示识别结果
-4. 如果同时检测到多个二维码，可以从列表中选择
-5. 点击二维码后查看其中的**原始文本内容**
-6. 如有需要，点击「复制」将内容复制到剪贴板
-7. 点击「继续扫码」返回扫描界面
+1. Grant camera permission.
+2. Place a QR code in the viewfinder.
+3. Once a QR code is detected, the results appear at the bottom of the screen.
+4. If multiple QR codes are detected, select one from the list.
+5. Tap a QR code to view its **raw text content**.
+6. If needed, tap “Copy” to copy the content to the clipboard.
+7. Tap “Continue Scanning” to return to the scanning screen.
 
 > [!IMPORTANT]
-> scanQR 不会根据二维码内容自动打开网页、启动应用或执行其他操作。
+> scanQR never automatically opens websites, launches apps, or performs other actions based on QR code content.
 
-例如扫描：
-
-```text
-https://example.com
-```
-
-scanQR 展示的只是：
+For example, when you scan:
 
 ```text
 https://example.com
 ```
 
-**不会自动打开浏览器。**
+scanQR simply displays:
 
-## 配置要求
+```text
+https://example.com
+```
 
-- 最低 Android 版本：Android 11（API 30）
-- 目标 Android 版本：Android 16（API 36）
-- Java 版本：11
+**It does not automatically open a browser.**
 
-## 最近更新
+## Requirements
+
+- Minimum Android version: Android 11 (API 30)
+- Target Android version: Android 16 (API 36)
+- Java version: 11
+
+## Recent Updates
 
 ### v1.0
 
-- 优化 UI 布局
-- 调整底部间距和按钮位置
-- ResultScreen：复制按钮与继续扫码按钮并排显示
-- CameraScreen：增加列表底部 padding，避免内容被遮挡
-- 修复 Release 包签名问题
+- Improved the UI layout
+- Adjusted bottom spacing and button positions
+- ResultScreen: placed the Copy and Continue Scanning buttons side by side
+- CameraScreen: added bottom padding to the list to prevent content from being obscured
+- Fixed release build signing issues
 
-## 设计理念
+## Design Philosophy
 
-scanQR 不尝试成为一个“什么都能做”的扫码工具。
+scanQR does not try to be an all-purpose QR code scanner.
 
-它只做三件事：
+It does just three things:
 
-**扫描。读取。展示。**
+**Scan. Read. Display.**
 
-不联网，不自动跳转，不替用户执行下一步操作。
+No network access, no automatic redirects, and no automatic next steps on your behalf.
 
-这也是 scanQR 存在的理由。
+That is why scanQR exists.
 
 ## License
 
@@ -168,4 +170,4 @@ Licensed under the [Apache License 2.0](LICENSE).
 
 ---
 
-如果 scanQR 对你有帮助，欢迎给个 Star ⭐
+If you find scanQR useful, consider giving it a star ⭐
